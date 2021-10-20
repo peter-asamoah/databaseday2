@@ -1,0 +1,18 @@
+---1
+select * from pubs2.pub_info as p1
+join pubs2.publishers as p2
+ on(p1.pub_id = p2.pub_id);
+ 
+
+select pub_name, substring(pr_info, 1, 40)
+from pubs2.pub_info as p1
+ join pubs2.publishers as p2
+ on(p1.pub_id = p2.pub_id);
+ 
+
+--2
+select title,  from pubs2.publishers p join pubs2.titles t
+on p.pub_id=t.pub_id;
+
+select p.pub_id, pub_name from pubs2.publishers p join pubs2.titles t
+on p.pub_id=t.pub_id;

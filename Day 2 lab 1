@@ -1,0 +1,50 @@
+select *  from pubs2.titles ;
+
+--1.
+select avg(price::numeric) from pubs2.titles group by type ;
+select "type" ::char(30 ), avg(price::numeric) from pubs2.titles group by type ;
+
+
+--2.
+select max(pubdate) - min(pubdate) from pubs2.titles ;
+select title, pubdate, (now() - pubdate) as timeSincePub from pubs2.titles ;
+select max(pubdate::timestamp) -min(pubdate::timestamp) from pubs2.titles;
+
+--3
+select "type", pub_id, min(coalesce (price::numeric)), max(coalesce (price::numeric)), avg (coalesce (price::numeric)) from pubs2.titles group by type ,pub_id ;
+
+
+--4
+
+select "type",pub_id, min(coalesce (price::numeric)), max(coalesce (price::numeric)), avg (coalesce (price::numeric)) 
+from pubs2.titles 
+group by type, pub_id
+having avg(price::numeric)>20;
+
+
+--5
+select title_id , title from pubs2.titles order by length(title)desc;
+
+
+
+
+
+-- Business Queries
+
+--1
+--select title, pubdate, avg(now()- pubdate) from pubs2.titles;
+
+select "type", avg (extract(month from pubdate)) from pubs2.titles t group by type;
+
+--2.
+select city, count (*) from pubs2.authors a group by city
+
+
+--3
+select  max(length(title)) from pubs2.titles  ;
+
+select title_id, title from pubs2.titles t order by length(title) desc limit 1;
+
+
+--4
+select stor_id , sum(qty) from pubs2.sales group by stor_id 
